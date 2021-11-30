@@ -1,0 +1,130 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background: #111;
+}
+
+h1{
+    text-align: center;
+    color: #eee;
+}
+
+.skills{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.circular-progress{
+    &,
+    &::before,
+    &::after{
+        width: 12rem;
+        height: 12rem;
+        border-radius: 50%;
+    }
+    margin: auto;
+    position: relative;
+    &::before,
+    &::after{
+        position: absolute;
+        top: 0;
+        left: 0;
+        text-align: center;
+    }
+    &::before{
+        padding: .5em;
+        box-sizing: border-box;
+        font-size: 1.8rem;
+        line-height: 8rem;
+    }
+    &::after{
+        line-height: 13rem;
+    }
+}
+
+@function progress($percent){
+    $deg: $percent / 100 * 180;
+    @return #{$deg}deg;
+}
+
+@mixin circular-progress($percent, $skill, $color, $bgcolor) {
+    $progress: progress($percent);
+    transform: rotate($progress);
+    background: linear-gradient(
+        0deg,
+        $color 50%,
+        rgba($color, .2) 50%
+    );
+    &::before,
+    &::after{
+        color: $color;
+    }
+    &::before{
+        content: "#{$skill}";
+        background: $bgcolor content-box;
+        transform: rotate(-#{$progress});
+        text-transform: uppercase;
+    }
+    &::after{
+        content: "#{$percent}%";
+        background: linear-gradient(
+            transparent 50%,
+            $bgcolor 50%
+        );
+        transform: scale(1.1) rotate(-#{$progress});
+    }
+}
+
+.html{
+    @include circular-progress(
+        70,
+        html5,
+        orange,
+        #111
+    )
+}
+
+.css{
+    @include circular-progress(
+        87,
+        css3,
+        lightblue,
+        #111
+    )
+}
+.javascript{
+    @include circular-progress(
+        80,
+        js,
+        yellow,
+        #111
+    )
+}
+.php{
+    @include circular-progress(
+        50,
+        php,
+        lighten(blue,20),
+        #111
+    )
+}
+.ruby{
+    @include circular-progress(
+        20,
+        ruby,
+        lighten(red,20),
+        #111
+    )
+}
+.python{
+    @include circular-progress(
+        15,
+        python,
+        gold,
+        #111
+    )
+}
