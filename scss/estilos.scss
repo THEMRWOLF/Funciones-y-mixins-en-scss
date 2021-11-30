@@ -10,12 +10,18 @@ h1{
     color: #eee;
 }
 
+.skills-container{
+    max-width: 1200px;
+    margin: auto;
+}
+
 .skills{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    margin-top: 30px;
+    margin: 50px;
+    gap: 30px;
 }
 
 .circular-progress{
